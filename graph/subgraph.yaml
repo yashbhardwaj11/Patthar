@@ -1,0 +1,51 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Patthar
+    network: mumbai
+    source:
+      address: "0x6A0209e78321b82f516253A868957bf697Ff0f8B"
+      abi: Patthar
+      startBlock: 39395480
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - AuctionEnded
+        - BatchMetadataUpdate
+        - ClosingTimestampUpdated
+        - DebrisAdded
+        - MetadataUpdate
+        - MeteoriteAdded
+        - NewBid
+        - Transfer
+      abis:
+        - name: Patthar
+          file: ./abis/Patthar.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: AuctionEnded(uint256,uint256,address)
+          handler: handleAuctionEnded
+        - event: BatchMetadataUpdate(uint256,uint256)
+          handler: handleBatchMetadataUpdate
+        - event: ClosingTimestampUpdated(uint256,uint256)
+          handler: handleClosingTimestampUpdated
+        - event: DebrisAdded(uint256,uint256,uint256)
+          handler: handleDebrisAdded
+        - event: MetadataUpdate(uint256)
+          handler: handleMetadataUpdate
+        - event: MeteoriteAdded(uint256,uint256,uint256)
+          handler: handleMeteoriteAdded
+        - event: NewBid(uint256,address,uint256,uint256)
+          handler: handleNewBid
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/patthar.ts

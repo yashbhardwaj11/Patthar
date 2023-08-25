@@ -1,0 +1,6 @@
+//Owner is 0x22
+
+MockStablecoinAddress =
+  "0x7B80f10CBB6dC2B204539B1d3Ffb9dA9F129028f";
+PattharAddress = "0x6A0209e78321b82f516253A868957bf697Ff0f8B";
+
