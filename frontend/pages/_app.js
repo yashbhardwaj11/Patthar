@@ -1,10 +1,10 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import "@fontsource/barlow/600.css";
 
 import { useState, useEffect } from "react";
 
-const PROJECT_ID = process.env.WALLET_CLOUD_PROJECT_ID;
-const RPC = process.env.MUMBAI_RPC;
+const RPC =
+  "https://polygon-mumbai.g.alchemy.com/v2/eH-QZss2iiTRnRLoHooQbkOcb6IBDFtf";
+const PROJECT_ID = "bb4d5889a8d2a37affe34112b7b479e7";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +14,8 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+
+import chakraTheme from "@/styles/chakraTheme";
 
 const { chains, publicClient } = configureChains(
   [polygonMumbai],
@@ -53,7 +55,7 @@ export default function App({ Component, pageProps }) {
     <>
       {ready ? (
         <>
-          <ChakraProvider>
+          <ChakraProvider theme={chakraTheme}>
             <WagmiConfig config={wagmiConfig}>
               <RainbowKitProvider chains={chains} modalSize="compact">
                 <Component {...pageProps} />

@@ -10,17 +10,19 @@ export default function Header() {
 
   return (
     <>
-      <Flex direction="row">
-        <Text fontFamily="Barlow">PATTHAR</Text>
+      <Flex direction="row" p={5}>
+        <Text fontFamily="Barlow" fontSize={40}>
+          PATTHAR
+        </Text>
         <Spacer />
-        <Flex direction="row" gap={5}>
+        <Flex direction="row" gap={10} align="center" justify="center">
           {address ? (
             <>
               <Link href="/components/bid/BidHero">Bid</Link>
-              <Link href="/components/bid/DashboardHero">DashboardHero</Link>
+              <Link href="/components/bid/DashboardHero">Dashboard</Link>
             </>
           ) : null}
-          <ConnectButton />
+          <ConnectButton label="Connect" showBalance={false} />
         </Flex>
       </Flex>
     </>
