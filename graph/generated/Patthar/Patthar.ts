@@ -574,44 +574,6 @@ export class Patthar extends ethereum.SmartContract {
   }
 }
 
-export class ConstructorCall extends ethereum.Call {
-  get inputs(): ConstructorCall__Inputs {
-    return new ConstructorCall__Inputs(this);
-  }
-
-  get outputs(): ConstructorCall__Outputs {
-    return new ConstructorCall__Outputs(this);
-  }
-}
-
-export class ConstructorCall__Inputs {
-  _call: ConstructorCall;
-
-  constructor(call: ConstructorCall) {
-    this._call = call;
-  }
-
-  get _name(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-
-  get _symbol(): string {
-    return this._call.inputValues[1].value.toString();
-  }
-
-  get _erc20Address(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
-}
-
-export class ConstructorCall__Outputs {
-  _call: ConstructorCall;
-
-  constructor(call: ConstructorCall) {
-    this._call = call;
-  }
-}
-
 export class ApproveCall extends ethereum.Call {
   get inputs(): ApproveCall__Inputs {
     return new ApproveCall__Inputs(this);
@@ -676,36 +638,6 @@ export class ConcludeBidCall__Outputs {
   }
 }
 
-export class GetCurrentTokenIdCall extends ethereum.Call {
-  get inputs(): GetCurrentTokenIdCall__Inputs {
-    return new GetCurrentTokenIdCall__Inputs(this);
-  }
-
-  get outputs(): GetCurrentTokenIdCall__Outputs {
-    return new GetCurrentTokenIdCall__Outputs(this);
-  }
-}
-
-export class GetCurrentTokenIdCall__Inputs {
-  _call: GetCurrentTokenIdCall;
-
-  constructor(call: GetCurrentTokenIdCall) {
-    this._call = call;
-  }
-}
-
-export class GetCurrentTokenIdCall__Outputs {
-  _call: GetCurrentTokenIdCall;
-
-  constructor(call: GetCurrentTokenIdCall) {
-    this._call = call;
-  }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
-}
-
 export class MintTokenCall extends ethereum.Call {
   get inputs(): MintTokenCall__Inputs {
     return new MintTokenCall__Inputs(this);
@@ -733,6 +665,10 @@ export class MintTokenCall__Inputs {
 
   get _closingTimestamp(): BigInt {
     return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get _floorPrice(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
   }
 }
 
@@ -994,6 +930,44 @@ export class UpdateFloorValueCall__Outputs {
   _call: UpdateFloorValueCall;
 
   constructor(call: UpdateFloorValueCall) {
+    this._call = call;
+  }
+}
+
+export class ConstructorCall extends ethereum.Call {
+  get inputs(): ConstructorCall__Inputs {
+    return new ConstructorCall__Inputs(this);
+  }
+
+  get outputs(): ConstructorCall__Outputs {
+    return new ConstructorCall__Outputs(this);
+  }
+}
+
+export class ConstructorCall__Inputs {
+  _call: ConstructorCall;
+
+  constructor(call: ConstructorCall) {
+    this._call = call;
+  }
+
+  get _name(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get _symbol(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get _erc20Address(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+}
+
+export class ConstructorCall__Outputs {
+  _call: ConstructorCall;
+
+  constructor(call: ConstructorCall) {
     this._call = call;
   }
 }

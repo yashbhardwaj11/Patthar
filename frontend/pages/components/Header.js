@@ -16,11 +16,11 @@ export default function Header() {
         </Text>
         <Spacer />
         <Flex direction="row" gap={10} align="center" justify="center">
-          <Link href="/components/about/AboutHero">About</Link>
+          <Link href="/layouts/AboutLayout">About</Link>
           {address ? (
             <>
-              <Link href="/components/bid/BidHero">Bid</Link>
-              <Link href="/components/bid/DashboardHero">Dashboard</Link>
+              <Link href="/layouts/MeteoriteLayout">Meteorites</Link>
+              <Link href="/layouts/DebrisLayout">Debris</Link>
             </>
           ) : null}
           <ConnectButton label="Connect" showBalance={false} />

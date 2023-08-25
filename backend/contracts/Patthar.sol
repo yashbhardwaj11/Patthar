@@ -81,7 +81,8 @@ contract Patthar is ERC721URIStorage {
     function mintToken(
         string memory _tokenURI,
         uint8 _type,
-        uint256 _closingTimestamp
+        uint256 _closingTimestamp,
+        uint256 _floorPrice
     ) external onlyOwner {
         if (_type != 1 && _type != 2) revert TypeInvalid();
         if (_closingTimestamp <= block.timestamp) revert InvalidClosingTime();
@@ -91,6 +92,7 @@ contract Patthar is ERC721URIStorage {
 
         closingTimestamp[tokenId] = _closingTimestamp;
         nftType[tokenId] = _type;
+        floorValue[tokenId] = _floorPrice * 10 ** 18;
 
         if (_type == 1) {
             emit MeteoriteAdded(block.timestamp, _closingTimestamp, tokenId);

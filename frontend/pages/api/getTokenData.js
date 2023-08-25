@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { ethers } = require("ethers");
 
-const { PattharAddress, PattharABI } = require("../constant_info.json");
+const { PattharAddress, PattharABI } = require("../../constants/info");
 
 const PROVIDER = process.env.MUMBAI_RPC;
 const DEPLOYER = process.env.PK_DEPLOYER;
@@ -18,7 +18,7 @@ async function getData(id) {
     const highestBid = await patthar.getHighestBid(id);
     const floorValue = await patthar.getFloorValue(id);
 
-    if (highestBid.toString() != 0) {
+    if (highestBid.toString() != "0") {
       return [uri, closingAt, highestBid];
     } else {
       return [uri, closingAt, floorValue];
@@ -30,7 +30,7 @@ async function getData(id) {
 }
 
 export default async function handler(req, res) {
-  if (req.method == "GET") {
+  if (req.method == "POST") {
     const data = req.body;
 
     const { id } = data;
@@ -39,12 +39,10 @@ export default async function handler(req, res) {
     if (result[0] == undefined)
       res.status(500).json({ error: "Return values undefined" });
     else
-      res
-        .status(200)
-        .json({
-          uri: result[0],
-          closeTimestamp: result[1],
-          highestBid: result[2],
-        });
+      res.status(200).json({
+        uri: result[0],
+        closeTimestamp: result[1],
+        highestBid: result[2],
+      });
   }
 }
