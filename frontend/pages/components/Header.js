@@ -16,6 +16,7 @@ export default function Header() {
         </Text>
         <Spacer />
         <Flex direction="row" gap={10} align="center" justify="center">
+          <Link href="/components/about/AboutHero">About</Link>
           {address ? (
             <>
               <Link href="/components/bid/BidHero">Bid</Link>
