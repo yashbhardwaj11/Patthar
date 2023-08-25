@@ -181,7 +181,7 @@ contract Patthar is ERC721URIStorage {
         return closingTimestamp[_tokenId];
     }
 
-    function getCurrentTokenId() external returns (uint256) {
+    function getCurrentTokenId() external view returns (uint256) {
         return tokenId;
     }
 
