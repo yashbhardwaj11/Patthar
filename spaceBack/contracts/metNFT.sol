@@ -3,29 +3,52 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+interface IERC20 {
+
+    function totalSupply() external view returns (uint256);
+    function balanceOf(address account) external view returns (uint256);
+    function allowance(address owner, address spender) external view returns (uint256);
+
+    function transfer(address recipient, uint256 amount) external returns (bool);
+    function approve(address spender, uint256 amount) external returns (bool);
+    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+
+
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    event Approval(address indexed owner, address indexed spender, uint256 value);
+}
 
 error NotOwner(address);
 error BidNotGreater(uint256);
 error NotValidAddress();
 error AmountNotEnough();
+error NumberInvalid();
 
 contract metNft is ERC721URIStorage{
 
     uint256 private tokenID;
     address private owner;
+    address private erc20Address;
     mapping(address=>uint256) moneyDeposited;
     mapping(uint256=>uint256) currentBid;
     mapping(uint256=>address) highestBidder;
     mapping(uint256=>uint256) ceilingValue;
 
+    // 1 for Meteorite, 2 for debry 
+    mapping(uint256 => uint8) nftType;
+
     event newBid(uint256 timeStamp, address bidder, uint256 tokenID,uint256 newValue);
     event newNFT(uint256 timeStamp, uint256 tokenID, string tokenURI);
     event auctionEnded(uint256 timeStamp, uint256 tokenID, address winner);
+    event meteoAdded(uint256 timeStamp, uint256 tokenID);
+    event debryAdded(uint256 timeStamp, uint256 tokenID);
 
-    constructor (string memory _name, string memory _symbol) ERC721(_name,_symbol){
+
+    constructor (string memory _name, string memory _symbol, address _erc20Address) ERC721(_name,_symbol){
         tokenID = 0;
         owner = msg.sender;
+        erc20Address = _erc20Address;
     }
 
     modifier isOwner{
@@ -49,9 +72,19 @@ contract metNft is ERC721URIStorage{
         _;
     }
 
-    function mintMet(string memory _tokenURI) public isOwner{
+    function mintMet(string memory _tokenURI, uint8 no) public isOwner{
         _safeMint(msg.sender, tokenID);
         _setTokenURI(tokenID,_tokenURI);
+        nftType[tokenID] = no;
+        if(no==1){
+            emit meteoAdded(block.timestamp, tokenID);
+        }
+        else if(no==2){
+            emit debryAdded(block.timestamp, tokenID);
+        }
+        else{
+            revert NumberInvalid();
+        }
         emit newNFT(block.timestamp, tokenID, _tokenURI);
         tokenID++;
     }
