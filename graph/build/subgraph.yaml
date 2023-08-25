@@ -6,9 +6,9 @@ dataSources:
     name: Patthar
     network: mumbai
     source:
-      address: "0x6A0209e78321b82f516253A868957bf697Ff0f8B"
+      address: "0xe74668c351c96661e2007c95B036141963e64246"
       abi: Patthar
-      startBlock: 39395480
+      startBlock: 39397685
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

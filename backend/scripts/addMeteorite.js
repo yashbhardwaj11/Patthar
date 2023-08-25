@@ -15,7 +15,9 @@ const patthar = new ethers.Contract(PattharAddress, PattharABI, wallet);
 
 async function create(_tokenURI, _type, _closingTimestamp) {
   try {
-    const txn = await patthar.mintToken(_tokenURI, _type, _closingTimestamp);
+    const txn = await patthar.mintToken(_tokenURI, _type, _closingTimestamp, {
+      gasLimit: 1000000,
+    });
     const receipt = await txn.wait(1);
     console.log(receipt);
     return receipt;
@@ -25,12 +27,11 @@ async function create(_tokenURI, _type, _closingTimestamp) {
 }
 
 async function main() {
-  const uri = "";
+  const uri = "QmPDtxWsdFMUA4SUL3nXKt8ST7iKkJCorQ9r32EjqZBWFu";
   const type = 1;
 
   //   25 / 8 / 23;
-  const closingTimestamp = "1692964800";
-
+  const closingTimestamp = "1693137600";
   await create(uri, type, closingTimestamp);
 }
 

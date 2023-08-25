@@ -83,7 +83,7 @@ contract Patthar is ERC721URIStorage {
         uint8 _type,
         uint256 _closingTimestamp
     ) external onlyOwner {
-        if (_type != 1 || _type != 2) revert TypeInvalid();
+        if (_type != 1 && _type != 2) revert TypeInvalid();
         if (_closingTimestamp <= block.timestamp) revert InvalidClosingTime();
 
         _safeMint(owner, tokenId);

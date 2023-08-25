@@ -286,7 +286,7 @@ export const MockStablecoinABI = [
 ];
 
 //Owner is 0x22
-export const PattharAddress = "0x6A0209e78321b82f516253A868957bf697Ff0f8B";
+export const PattharAddress = "0xe74668c351c96661e2007c95B036141963e64246";
 export const PattharABI = [
   {
     inputs: [
