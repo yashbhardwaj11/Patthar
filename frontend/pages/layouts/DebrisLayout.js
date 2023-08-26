@@ -34,7 +34,7 @@ export default function DebrisLayout() {
       else setData(finalArray);
     }
 
-    toast.info("Fetching User Data.");
+    toast.info("Fetching Latest Data.");
 
     execute();
   }, []);

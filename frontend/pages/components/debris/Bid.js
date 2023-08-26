@@ -1,3 +1,3 @@
-export default function Bid() {
+export default function Bid({ amount, id }) {
   return;
 }

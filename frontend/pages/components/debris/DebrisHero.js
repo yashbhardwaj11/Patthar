@@ -7,11 +7,7 @@ export default function DebrisHero({ data }) {
       <Flex flexWrap="wrap" pt={5}>
         {data
           ? data.map((item, index) => (
-              <Card
-                key={index}
-                tokenId={item["tokenId"]}
-                closingTimestamp={item["closingTimestamp"]}
-              />
+              <Card key={index} tokenId={item["tokenId"]} />
             ))
           : null}
       </Flex>
